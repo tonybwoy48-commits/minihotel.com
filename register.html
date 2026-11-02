@@ -1,1 +1,49 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Book & Create Account</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui,sans-serif}body{background:#f6f7fb;padding:16px}.box{background:#fff;border-radius:20px;padding:20px;max-width:400px;margin:20px auto;box-shadow:0 10px 30px rgba(0,0,0,.08)}h2{margin-bottom:4px}.sub{color:#6b7280;font-size:13px;margin-bottom:12px}.chosen{background:#e6edff;color:#1e3a8a;padding:12px;border-radius:12px;font-weight:700;text-align:center;margin-bottom:14px;line-height:1.4}label{font-size:12px;font-weight:600;margin:10px 0 4px;display:block}input,select{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:12px;font-size:14px;margin-bottom:8px}.row2{display:flex;gap:8px}.row2 select{width:95px}.btn{width:100%;background:#2563eb;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:700;margin-top:12px}a{color:#2563eb;text-decoration:none;font-size:13px;font-weight:600}</style></head><body><div class="box"><h2>Create Account & Book 🏨</h2><div class="sub">Kumasi, Ghana</div><div id="chosen" class="chosen">Loading your room...</div><label>Full Name</label><input placeholder="Kwame Asante"><label>Phone - Ghana +233</label><div class="row2"><select><option>+233</option></select><input placeholder="24 123 4567"></div><label>Email</label><input type="email" placeholder="kwame@gmail.com"><label>Password</label><input type="password" placeholder="Create password"><button class="btn" onclick="book()">Create Account & Confirm Booking</button><p style="text-align:center;margin-top:14px"><a href="index.html">← Choose different room</a></p></div><script>const params=new URLSearchParams(window.location.search);const room=params.get('room')||'Standard';const price=params.get('price')||'180';document.getElementById('chosen').innerHTML=`✅ You chose: ${room} Room<br>GHS ${price} /night - Now create account`;function book(){alert(`Account created! ${room} booked for GHS ${price}/night. We will call your +233 number.`);window.location.href='index.html';}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - MiniHotel Kumasi</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui,sans-serif}
+body{background:#f6f7fb;padding-bottom:30px;color:#111827}
+.top{background:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.top a{width:32px;height:32px;background:#f3f4f6;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#111}
+.container{max-width:420px;margin:0 auto;padding:16px}
+.chosenCard{background:#fff;border-radius:16px;padding:12px;display:flex;gap:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);margin-bottom:16px;border:1.5px solid #dbeafe}
+.chosenCard img{width:90px;height:70px;border-radius:10px;object-fit:cover}
+.chosenCard h3{font-size:15px}
+.chosenCard p{font-size:12px;color:#6b7280;margin-top:2px}
+.chosenCard .tag{font-size:10px;background:#2563eb;color:#fff;padding:3px 8px;border-radius:20px;font-weight:700}
+.formBox{background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.formBox h2{font-size:20px;margin-bottom:4px}
+.sub{font-size:13px;color:#6b7280;margin-bottom:16px}
+label{font-size:12px;font-weight:700;margin:12px 0 6px;display:block;color:#374151}
+input{width:100%;padding:12px 14px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;outline:none}
+input:focus{border-color:#2563eb}
+.phoneRow{display:flex;gap:8px}
+.phoneRow select{width:105px;padding:12px;border:1.5px solid #e5e7eb;border-radius:12px;background:#fff;font-weight:600}
+.check{display:flex;gap:8px;margin-top:14px;font-size:12px;color:#6b7280}
+.btn{width:100%;background:#2563eb;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;font-size:15px;margin-top:18px}
+.btn:disabled{background:#9ca3af}
+.bottomLink{text-align:center;margin-top:16px;font-size:13px}
+.bottomLink a{color:#2563eb;font-weight:700;text-decoration:none}
+.ghanaBadge{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;padding:8px 10px;border-radius:10px;font-size:12px;text-align:center;margin-bottom:14px;font-weight:600}
+.error{font-size:11px;color:#dc2626;margin-top:4px;display:none}
+</style>
+</head>
+<body>
+
+<div class="top">
+<a href="index.html">←</a>
+<b>Create Account</b>
+</div>
+
+<div class="container">
+
+<div id="roomBox" class="chosenCard">
+<img id="roomImg" src="">
+<div>
+<div><span class="tag" id="roomTag">ROOM</span></div>
+<h3 id="roomName">Loading...</h3>
+<p id="roomPrice">GHS -- /night •
