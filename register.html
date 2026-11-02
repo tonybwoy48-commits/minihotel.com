@@ -1,1 +1,57 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin - MiniHotel</title><style>body{margin:0;font-family:system-ui;background:#f1f5f9}header{background:#fff;padding:16px 24px;display:flex;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.05)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px}.card{background:#fff;padding:20px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}table{width:100%;background:#fff;border-radius:16px;border-collapse:collapse;overflow:hidden;margin:0 20px;width:calc(100% - 40px)}th,td{padding:12px;text-align:left;border-bottom:1px solid #e2e8f0}th{background:#f8fafc}.badge{padding:4px 10px;border-radius:20px;font-size:12px}.confirmed{background:#dcfce7;color:#166534}.pending{background:#fef9c3;color:#854d0e}</style></head><body><header><b>🏨 MiniHotel Admin</b><span>tonybwoy48</span></header><div class="cards"><div class="card"><h3>Total Bookings</h3><h1>128</h1><small>+12% this month</small></div><div class="card"><h3>Occupancy Rate</h3><h1>78%</h1><small>42 rooms occupied</small></div><div class="card"><h3>Revenue</h3><h1>GHS 45,230</h1><small>+8% this week</small></div></div><table><tr><th>Guest</th><th>Room</th><th>Date</th><th>Amount</th><th>Status</th></tr><tr><td>Ama Mensah</td><td>Deluxe 101</td><td>2026-05-12</td><td>GHS 850</td><td><span class="badge confirmed">Confirmed</span></td></tr><tr><td>Kwame Boateng</td><td>Standard 204</td><td>2026-05-13</td><td>GHS 450</td><td><span class="badge pending">Pending</span></td></tr><tr><td>Efua Addo</td><td>Suite 301</td><td>2026-05-14</td><td>GHS 1,200</td><td><span class="badge confirmed">Confirmed</span></td></tr></table><p style="padding:20px"><a href="index.html">Home</a> | <a href="register.html">Register</a></p></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book & Create Account</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui,sans-serif}
+body{background:#f6f7fb;padding:16px}
+.box{background:#fff;border-radius:20px;padding:20px;max-width:400px;margin:20px auto;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+h2{margin-bottom:4px} .sub{color:#6b7280;font-size:13px;margin-bottom:12px}
+.chosen{background:#e6edff;color:#1e3a8a;padding:12px;border-radius:12px;font-weight:700;text-align:center;margin-bottom:14px}
+label{font-size:12px;font-weight:600;margin:10px 0 4px;display:block}
+input,select{width:100%;padding:12px;border:1px solid #e5e7eb;border-radius:12px;font-size:14px;margin-bottom:8px}
+.row2{display:flex;gap:8px} .row2 select{width:95px}
+.btn{width:100%;background:#2563eb;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:700;margin-top:12px}
+a{color:#2563eb;text-decoration:none;font-size:13px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Create Account & Book 🏨</h2>
+<div class="sub">Kumasi, Ghana</div>
+<div id="chosen" class="chosen">Loading your room...</div>
+
+<label>Full Name</label>
+<input id="name" placeholder="Kwame Asante">
+
+<label>Phone - Ghana +233</label>
+<div class="row2">
+<select><option>+233</option></select>
+<input id="phone" placeholder="24 123 4567">
+</div>
+
+<label>Email</label>
+<input id="email" placeholder="kwame@gmail.com" type="email">
+
+<label>Password</label>
+<input id="pass" type="password" placeholder="Create password">
+
+<button class="btn" onclick="book()">Create Account & Confirm Booking</button>
+
+<p style="text-align:center;margin-top:14px"><a href="index.html">← Choose different room</a></p>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const room = params.get('room') || 'Standard';
+const price = params.get('price') || '180';
+document.getElementById('chosen').innerHTML = `✅ You chose: ${room} Room<br>GHS ${price} /night`;
+function book(){
+  alert(`Account created! ${room} booked for GHS ${price}/night. We will call your +233 number.`);
+  window.location.href='index.html';
+}
+</script>
+</body>
+</html>
