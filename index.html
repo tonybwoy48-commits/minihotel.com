@@ -1,38 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MiniHotel Kumasi - Luxury in Ghana</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f8fafc;color:#0f172a}.nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}.logoBox{width:36px;height:36px;background:#0f172a;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff}.navLinks{display:flex;gap:10px}.btn{padding:10px 16px;border-radius:10px;border:none;font-weight:700;font-size:12.5px;cursor:pointer}.ghost{background:#f1f5f9}.primary{background:#0f172a;color:#fff}.hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:40px 20px;text-align:center}.hero h1{font-size:28px;line-height:1.2}.hero p{opacity:.7;margin:10px 0 18px;font-size:13px}.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:20px;max-width:1100px;margin:0 auto}.roomCard{background:#fff;border:1px solid #e2e8f0;border-radius:18px;overflow:hidden}.roomImg{height:160px;background-size:cover;background-position:center}.roomBody{padding:16px}.price{font-size:20px;font-weight:900}.badge{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#dcfce7;color:#166534}</style></head><body>
-<div class="nav"><div class="logo"><div class="logoBox">M</div>MiniHotel Kumasi</div><div class="navLinks"><button class="btn ghost" onclick="location.href='login.html'">Login</button><button class="btn primary" onclick="location.href='register.html'">Create Account</button></div></div>
-
-<div class="hero"><h1>Luxury & Comfort<br>in Kumasi, Ghana</h1><p>Tap Book → Create Account → See WiFi & Contact Front Desk. Admin sets prices live.</p><button class="btn" style="background:#fff;color:#0f172a" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">↓ See Rooms & Prices</button></div>
-
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MiniHotel Kumasi</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f8fafc}.nav{background:#fff;border-bottom:1px solid #e2e8f0;padding:14px 18px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:10}.logo{font-weight:900;display:flex;gap:8px;align-items:center}.logoBox{width:32px;height:32px;background:#0f172a;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center}.btn{padding:10px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.ghost{background:#f1f5f9}.primary{background:#0f172a;color:#fff}.hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:36px 18px;text-align:center}.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;padding:16px;max-width:1100px;margin:0 auto}.roomCard{background:#fff;border:1px solid #e2e8f0;border-radius:18px;overflow:hidden}.roomImg{height:150px;background-size:cover;background-position:center}.roomBody{padding:14px}</style></head><body>
+<div class="nav"><div class="logo"><div class="logoBox">M</div>MiniHotel Kumasi</div><div><button class="btn ghost" onclick="location.href='login.html'">Login</button><button class="btn primary" onclick="location.href='register.html'">Create Account</button></div></div>
+<div class="hero"><h1>Luxury & Comfort in Kumasi</h1><p style="opacity:.7;margin:8px 0 14px;font-size:13px">Book → Create Account → Pay (Momo/Cash) → Admin Approves → WiFi</p><button class="btn" style="background:#fff;color:#0f172a" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">See Rooms & Prices ↓</button></div>
 <div id="rooms" class="rooms"></div>
-
-<div style="text-align:center;padding:20px;color:#64748b;font-size:11px">© MiniHotel Kumasi • One Login: admin / MiniHotel2026 → Admin | Guest account → Guest Page</div>
-
 <script>
-let prices = JSON.parse(localStorage.getItem('roomPrices')||'{"Standard":180,"Deluxe":250,"Executive":300,"Suite":450}');
-let roomsData = [
- {type:'Standard',name:'Standard Room',img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600',desc:'1 Bed • 2 Guests • Free WiFi',price:prices.Standard},
- {type:'Deluxe',name:'Deluxe Room',img:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600',desc:'1 King • 2 Guests • City View',price:prices.Deluxe},
- {type:'Executive',name:'Executive Room',img:'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600',desc:'King • Work Desk • Balcony',price:prices.Executive},
- {type:'Suite',name:'Luxury Suite',img:'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600',desc:'2 Rooms • 4 Guests • Jacuzzi',price:prices.Suite}
-];
-
-function render(){
- document.getElementById('rooms').innerHTML = roomsData.map(r=>`
- <div class="roomCard"><div class="roomImg" style="background-image:url('${r.img}')"></div><div class="roomBody"><div style="display:flex;justify-content:space-between"><b>${r.name}</b><span class="badge">Available</span></div><small style="color:#64748b">${r.desc}</small><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><div><span class="price">GHS ${r.price}</span><small style="color:#64748b"> / night</small></div><button class="btn primary" onclick="handleBook('${r.type}')">Book Now</button></div></div></div>`).join('');
-}
-function handleBook(type){
- // Save which room user wanted
- localStorage.setItem('wantedRoom',type);
- const cur = JSON.parse(localStorage.getItem('currentUser')||'null');
- if(cur){
-   if(cur.role==='admin'){location.href='admin.html';}
-   else{location.href='guest.html?room='+type;}
- }else{
-   // Not logged → Go to Create Account first, then after login will see price + room
-   location.href='register.html?room='+type;
- }
-}
+let prices=JSON.parse(localStorage.getItem('roomPrices')||'{"Standard":180,"Deluxe":250,"Executive":300,"Suite":450}');
+let rooms=[{t:'Standard',n:'Standard Room',d:'1 Bed • 2 Guests • Free WiFi',i:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600'},{t:'Deluxe',n:'Deluxe Room',d:'King • City View',i:'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600'},{t:'Executive',n:'Executive Room',d:'Work Desk • Balcony',i:'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'},{t:'Suite',n:'Luxury Suite',d:'2 Rooms • Jacuzzi',i:'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600'}];
+function render(){document.getElementById('rooms').innerHTML=rooms.map(r=>`<div class="roomCard"><div class="roomImg" style="background-image:url('${r.i}')"></div><div class="roomBody"><b>${r.n}</b><br><small style="color:#64748b">${r.d}</small><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div><b>GHS ${prices[r.t]}</b><small> /night</small></div><button class="btn primary" onclick="book('${r.t}')">Book Now</button></div></div></div>`).join('');}
+function book(t){localStorage.setItem('wantedRoom',t);let cur=JSON.parse(localStorage.getItem('currentUser')||'null');if(cur&&cur.role==='admin')location.href='admin.html';else if(cur)location.href='payment.html';else location.href='register.html?room='+t;}
 render();
-// Update prices if admin changed them live
-setInterval(()=>{let np=JSON.parse(localStorage.getItem('roomPrices')||'null');if(np&&JSON.stringify(np)!==JSON.stringify(prices)){prices=np;roomsData=roomsData.map(r=>({...r,price:prices[r.type]}));render();}},2000);
 </script></body></html>
