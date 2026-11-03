@@ -1,22 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiniHotel - Bookings Management</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,-apple-system,sans-serif}
-body{background:#f8fafc;display:flex;min-height:100vh;color:#0f172a}
-.sidebar{width:240px;background:#0f172a;color:#fff;display:flex;flex-direction:column;position:fixed;height:100vh;z-index:10}
-.logo{padding:20px 18px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;border-bottom:1px solid #1e293b}
-.logo span{color:#3b82f6}
-.nav{padding:12px 10px;flex:1}
-.nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:#94a3b8;text-decoration:none;font-size:13.5px;font-weight:500;margin-bottom:4px;cursor:pointer;transition:.2s}
-.nav a.active{background:#2563eb;color:#fff}
-.nav a:hover{background:#1e293b;color:#fff}
-.nav small{margin:18px 12px 6px;display:block;color:#475569;font-size:10px;letter-spacing:1px;font-weight:700}
-.user{padding:14px 18px;border-top:1px solid #1e293b;display:flex;align-items:center;gap:10px}
-.user b{font-size:12px}
-.user small{color:#64748b;font-size:10px}
-.main{margin-left:240px;flex:1;padding:24px 24px 100px}
-.header{display:flex;justify-content:space-between
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin - MiniHotel</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f1f5f9}.nav{background:#0f172a;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center;gap:8px;font-weight:800}.logoBox{width:32px;height:32px;background:#fff;color:#0f172a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900}.wrap{padding:16px;max-width:1000px;margin:0 auto}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.card{background:#fff;border-radius:16px;padding:16px;border:1px solid #e2e8f0}.input{width:100%;padding:11px;border-radius:10px;border:1.5px solid #e2e8f0;margin:6px 0}.btn{padding:11px 14px;border-radius:10px;border:none;font-weight:800;cursor:pointer;font-size:12px}.primary{background:#0f172a;color:#fff;width:100%}.ok{background:#dcfce7;color:#166534;padding:8px;border-radius:8px;font-size:11px;display:none;margin-top:8px;text-align:center}.list{margin-top:8px}.item{background:#f8fafc;padding:10px;border-radius:10px;margin:6px 0;font-size:12px;border:1px solid #eef2f7}</style></head><body>
+<div class="nav"><div class="logo"><div class="logoBox">M</div> MiniHotel Admin</div><div style="display:flex;gap:8px"><button class="btn" style="background:#1e293b;color:#fff" onclick="location.href='index.html'">Home</button><button class="btn" style="background:#ef4444;color:#fff" onclick="logout()">Logout</button></div></div>
+
+<div class="wrap">
+<div class="grid">
+<div class="card"><b>📶 WiFi Settings</b><small style="display:block;color:#64748b;margin:4px 0">Guest sees this</small><input id="wName" class="input" placeholder="WiFi Name"><input id="wPass" class="input" placeholder="WiFi Password"><button class="btn primary" onclick="saveWifi()">Save WiFi</button><div id="wOk" class="ok">✅ WiFi Saved!</div></div>
+<div class="card"><b>💰 Room Prices (GHS)</b><small style="display:block;color:#64748b;margin:4px 0">Updates Home instantly</small><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><input id="p1" class="input" placeholder="Standard"><input id="p2" class="input" placeholder="Deluxe"><input id="p3" class="input" placeholder="Executive"><input id="p4" class="input" placeholder="Suite"></div><button class="btn primary" onclick="savePrices()">Save Prices</button><div id="pOk" class="ok">✅ Prices Saved!</div></div>
+</div>
+
+<div class="card"><b>📩 Guest Messages & Bookings</b> <button class="btn" style="background:#f1f5f9;margin-left:8px" onclick="loadData()">Refresh</button><div id="bookList" class="list"></div></div>
+
+<div class="card" style="margin-top:12px"><b>🔑 Change Admin Login</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px"><input id="aUser" class="input" placeholder="New admin user"><input id="aPass" class="input" placeholder="New admin pass"></div><button class="btn primary" onclick="saveAdmin()">Save Admin Login</button><div id="aOk" class="ok">✅ Admin Login Updated!</div></div>
+</div>
+
+<script>
+// SAFE CHECK - won't cause blank page
+try{
+  const cur = JSON.parse(localStorage.getItem('currentUser')||'null');
+  if(!cur || cur.role!=='admin'){
+    const logged = localStorage.getItem('adminLoggedIn');
+    if(logged!=='true'){location.href='login.html';}
+  }
+}catch(e){location.href='login.html';}
+
+function saveWifi(){
+  const n=document.getElementById('wName').value||'MiniHotel_Guest_5G';
+  const p=document.getElementById('wPass').value||'Kumasi@2026';
+  localStorage.setItem('adminWifiName',n);
+  localStorage.setItem('adminWifiPass',p);
+  document.getElementById('wOk').style.display='block';
+  setTimeout(()=>document.getElementById('wOk').style.display='none',2000);
+}
+function savePrices(){
+  const prices={Standard:document.getElementById('p1').value||180,Deluxe:document.getElementById('p2').value||250,Executive:document.getElementById('p3').value||300,Suite:document.getElementById('p4').value||450};
+  localStorage.setItem('roomPrices',JSON.stringify(prices));
+  document.getElementById('pOk').style.display='block';
+  setTimeout(()=>document.getElementById('pOk').style.display='none',2000);
+}
+function saveAdmin(){
+  const u=document.getElementById('aUser').value.trim();
+  const p=document.getElementById('aPass').value.trim();
+  if(u) localStorage.setItem('adminUser',u);
+  if(p) localStorage.setItem('adminPass',p);
+  // update in allUsers too
+  let users=JSON.parse(localStorage.getItem('allUsers')||'[]');
+  users=users.map(x=>{if(x.role==='admin'){if(u) x.email=u; if(p) x.password=p;} return x;});
+  localStorage.setItem('allUsers',JSON.stringify(users));
+  document.getElementById('aOk').style.display='block';
+  setTimeout(()=>document.getElementById('aOk').style.display='none',2000);
+}
+function loadData(){
+  document.getElementById('wName').value=localStorage.getItem('adminWifiName')||'';
+  document.getElementById('wPass').value=localStorage.getItem('adminWifiPass')||'';
+  let pr=JSON.parse(localStorage.getItem('roomPrices')||'{"Standard":180,"Deluxe":250,"Executive":300,"Suite":450}');
+  document.getElementById('p1').value=pr.Standard;document.getElementById('p2').value=pr.Deluxe;document.getElementById('p3').value=pr.Executive;document.getElementById('p4').value=pr.Suite;
+  
+  // Show bookings + guest messages
+  const bookings=JSON.parse(localStorage.getItem('bookings')||'[]');
+  const msgs=JSON.parse(localStorage.getItem('guestMessages')||'[]');
+  const users=JSON.parse(localStorage.getItem('allUsers')||'[]').filter(u=>u.role==='guest');
+  let html='';
+  if(users.length===0) html+='<div class="item">No guests yet</div>';
+  users.forEach(u=>{html+=`<div class="item"><b>${u.name}</b> • ${u.email} • ${u.phone||''}<br><small>Role: ${u.role}</small></div>`});
+  msgs.forEach(m=>{html+=`<div class="item" style="border-left:3px solid #2563eb"><b>Message from ${m.name}:</b> ${m.msg}<br><small>${m.time}</small></div>`});
+  bookings.forEach(b=>{html+=`<div class="item"><b>${b.room}</b> - ${b.guest} - GHS ${b.price}<br><small>${b.date}</small></div>`});
+  document.getElementById('bookList').innerHTML=html||'<div class="item">No data yet</div>';
+}
+function logout(){localStorage.removeItem('adminLoggedIn');localStorage.removeItem('currentUser');location.href='login.html';}
+loadData();
+</script></body></html>
