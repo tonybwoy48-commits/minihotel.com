@@ -1,39 +1,45 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login - MiniHotel</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#0f172a;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}.box{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:28px;box-shadow:0 20px 40px rgba(0,0,0,.3)}h2{text-align:center;margin-bottom:6px}p{text-align:center;color:#64748b;font-size:13px;margin-bottom:20px}.input{width:100%;padding:13px;border-radius:12px;border:1.5px solid #e2e8f0;margin:8px 0;font-size:14px}.input:focus{border-color:#2563eb;outline:none}.btn{width:100%;padding:13px;border-radius:12px;border:none;font-weight:800;font-size:14px;margin-top:12px;cursor:pointer}.primary{background:#2563eb;color:#fff}.ghost{background:#f1f5f9;color:#111}.hint{background:#f8fafc;padding:12px;border-radius:10px;font-size:11px;color:#64748b;margin-top:14px}</style></head><body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login - MiniHotel</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f1f5f9;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}.box{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08);border:1px solid #e2e8f0}.icon{width:56px;height:56px;background:#dbeafe;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px}h2{text-align:center;font-size:22px}h2+p{text-align:center;color:#64748b;font-size:13px;margin:6px 0 20px}.input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid #e2e8f0;margin:7px 0;font-size:14px}.input:focus{border-color:#2563eb;outline:none}.btn{width:100%;padding:13px;border-radius:12px;border:none;font-weight:800;font-size:14px;margin-top:12px;cursor:pointer}.primary{background:#0f172a;color:#fff}.primary:active{opacity:.9}.ghost{background:#f8fafc;color:#64748b;border:1px solid #e2e8f0}.err{display:none;background:#fef2f2;color:#dc2626;padding:10px;border-radius:10px;font-size:12px;text-align:center;margin-top:10px;border:1px solid #fee2e2}.info{background:#f8fafc;padding:12px;border-radius:12px;font-size:11px;color:#64748b;margin-top:16px;line-height:1.5}</style></head><body>
 <div class="box">
-<div style="text-align:center;font-size:40px">🔐</div>
+<div class="icon">🔐</div>
 <h2>Admin Login</h2>
-<p>MiniHotel Kumasi - Admin Only</p>
-<input id="user" class="input" placeholder="Username">
-<input id="pass" class="input" type="password" placeholder="Password">
-<button class="btn primary" onclick="login()">Login as Admin</button>
-<button class="btn ghost" onclick="location.href='index.html'">← Back to Home</button>
-<div class="hint">
-<b>Default Admin Login:</b><br>
+<p>Kumasi MiniHotel • Ghana<br><b style="color:#0f172a">Admin Only - No Registration</b></p>
+
+<input id="email" class="input" type="text" placeholder="Admin Username">
+<input id="pass" class="input" type="password" placeholder="Admin Password">
+
+<button class="btn primary" onclick="loginAdmin()">Login → Admin Dashboard</button>
+<button class="btn ghost" onclick="location.href='index.html'">← Back to Hotel</button>
+
+<div id="err" class="err">❌ Wrong admin login. Try: admin / MiniHotel2026</div>
+
+<div class="info">
+🔑 <b>Fixed Admin Login (No Create Account):</b><br>
 Username: <b>admin</b><br>
 Password: <b>MiniHotel2026</b><br><br>
-You can change it in Settings after login.
+Guest login is separate: login.html → Guest Page<br>
+Admin login → Admin Dashboard
 </div>
-<p id="err" style="color:#dc2626;font-size:12px;text-align:center;margin-top:10px;display:none">❌ Wrong username or password</p>
 </div>
 
 <script>
-function login(){
-  const u=document.getElementById('user').value.trim();
+function loginAdmin(){
+  const u=document.getElementById('email').value.trim();
   const p=document.getElementById('pass').value.trim();
-  const savedUser=localStorage.getItem('adminUser')||'admin';
-  const savedPass=localStorage.getItem('adminPass')||'MiniHotel2026';
+  // FIXED ADMIN CREDENTIALS - NO REGISTRATION
+  const ADMIN_USER = localStorage.getItem('adminUser') || 'admin';
+  const ADMIN_PASS = localStorage.getItem('adminPass') || 'MiniHotel2026';
   
-  if(u===savedUser && p===savedPass){
+  // Also allow email format
+  if((u==='admin' || u==='admin@minihotel.com') && p===ADMIN_PASS){
     localStorage.setItem('adminLoggedIn','true');
     localStorage.setItem('adminLoginTime',new Date().toLocaleString());
-    location.href='admin.html?v=login';
+    location.href='admin.html?v=adminlogin';
   }else{
     document.getElementById('err').style.display='block';
-    // shake
     if(navigator.vibrate) navigator.vibrate([100,50,100]);
   }
 }
-// auto redirect if already logged
+// If already logged, go to admin
 if(localStorage.getItem('adminLoggedIn')==='true'){
   location.href='admin.html';
 }
