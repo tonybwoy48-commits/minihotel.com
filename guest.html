@@ -1,71 +1,25 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Guest - MiniHotel</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui,sans-serif}body{background:#f6f7fb;color:#111827;padding-bottom:90px}.top{background:#2563eb;color:#fff;padding:18px 16px 24px;border-radius:0 0 20px 20px}.avatar{width:48px;height:48px;background:#fff;color:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px}.card{background:#fff;margin:12px 16px;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}.badge{font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px}.active{background:#dcfce7;color:#166534}.wifi{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border-radius:16px;padding:16px;margin:12px 16px;display:flex;justify-content:space-between;align-items:center}.roomImg{width:100%;height:150px;border-radius:12px;object-fit:cover;margin-top:12px}.stayGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stayItem{background:#f9fafb;padding:10px;border-radius:12px}.stayItem small{color:#6b7280;font-size:11px;display:block}.btn{width:100%;padding:13px;border-radius:12px;font-weight:700;border:none;margin-top:10px;font-size:14px;cursor:pointer}.primary{background:#2563eb;color:#fff}.secondary{background:#f3f4f6;color:#111;border:1px solid #e5e7eb}.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -2px 10px rgba(0,0,0,.06)}.nav a{text-decoration:none;color:#6b7280;font-size:11px;text-align:center}.nav a.active{color:#2563eb;font-weight:700}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:420px;border-radius:20px 20px 0 0;padding:20px;animation:up .3s}@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}textarea{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:12px;height:90px;font-size:14px;margin:10px 0}</style></head><body>
-<div class="top"><div style="display:flex;justify-content:space-between;align-items:center"><div><small>🇬🇭 MiniHotel Kumasi</small><h2 id="gName" style="margin-top:4px">Hi, Yaw 👋</h2><p id="gFull" style="font-size:13px;opacity:.9">Yaw mickel</p></div><div class="avatar" id="gAvatar">Y</div></div></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Guest</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f6f7fb;padding-bottom:90px}.top{background:#2563eb;color:#fff;padding:18px 16px 24px;border-radius:0 0 20px 20px}.avatar{width:48px;height:48px;background:#fff;color:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}.card{background:#fff;margin:12px 16px;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}.wifi{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border-radius:16px;padding:16px;margin:12px 16px;display:flex;justify-content:space-between}.roomImg{width:100%;height:150px;border-radius:12px;object-fit:cover;margin-top:12px}.stayGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stayItem{background:#f9fafb;padding:10px;border-radius:12px}.stayItem small{color:#6b7280;font-size:11px;display:block}.btn{width:100%;padding:13px;border-radius:12px;font-weight:700;border:none;margin-top:10px;font-size:14px}.primary{background:#2563eb;color:#fff}.secondary{background:#f3f4f6;color:#111;border:1px solid #e5e7eb}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:420px;border-radius:20px 20px 0 0;padding:20px}textarea{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:12px;height:90px;margin:10px 0}.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0}</style></head><body>
+<div class="top"><div style="display:flex;justify-content:space-between"><div><small>🇬🇭 MiniHotel Kumasi</small><h2 id="gName">Hi, Yaw 👋</h2><small id="gFull">Yaw mickel</small></div><div class="avatar" id="gAvatar">Y</div></div></div>
 
-<!-- WIFI PASSWORD - VISIBLE AFTER LOGIN -->
-<div class="wifi" id="wifiBox">
-<div><small style="opacity:.8">📶 GUEST WIFI</small><br><b style="font-size:16px">MiniHotel_Guest_5G</b><br><div style="display:flex;gap:8px;align-items:center;margin-top:6px"><span style="background:rgba(255,255,255,.2);padding:4px 10px;border-radius:8px;font-family:monospace;font-weight:800" id="wifiPass">Kumasi@2026</span><button onclick="copyWifi()" style="background:#fff;color:#2563eb;border:none;padding:4px 10px;border-radius:8px;font-weight:700;font-size:12px">Copy</button></div></div>
-<div style="text-align:center"><div style="background:#fff;color:#111;padding:6px;border-radius:8px;font-size:10px;font-weight:700">QR<br>WiFi</div><small style="font-size:10px">Tap to show</small></div>
-</div>
+<!-- WIFI - THIS IS NEW -->
+<div class="wifi"><div><small>📶 GUEST WIFI</small><br><b>MiniHotel_Guest_5G</b><br><div style="margin-top:8px"><span id="wifiPass" style="background:rgba(255,255,255,.25);padding:5px 10px;border-radius:8px;font-family:monospace;font-weight:800">Kumasi@2026</span> <button onclick="copyWifi()" style="background:#fff;color:#2563eb;border:none;padding:5px 10px;border-radius:8px;font-weight:700;margin-left:6px">Copy</button></div></div><div style="background:#fff;color:#2563eb;padding:8px;border-radius:10px;font-size:11px;font-weight:800;text-align:center">QR<br>WIFI</div></div>
 
-<div class="card"><div style="display:flex;justify-content:space-between"><h3>Current Booking</h3><span class="badge active">● CHECKED IN</span></div><img id="roomImg" class="roomImg" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600"><h3 id="roomName" style="margin-top:12px">Standard Room - Floor 2</h3><p style="font-size:12px;color:#6b7280">Kumasi, Ghana 📍 • Free WiFi Included</p><div class="stayGrid"><div class="stayItem"><small>Check-In</small><b>Nov 5</b><small>2PM</small></div><div class="stayItem"><small>Check-Out</small><b>Nov 8</b><small>11AM</small></div><div class="stayItem"><small>Guests</small><b>2 Guests</b></div><div class="stayItem"><small>Total</small><b id="roomPrice">GHS 540</b></div></div><button class="btn primary" onclick="openContact()">📞 Contact Front Desk</button><button class="btn secondary" onclick="openService()">🧹 Room Service</button></div>
+<div class="card"><h3>Current Booking ● CHECKED IN</h3><img id="roomImg" class="roomImg" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600"><h3 id="roomName" style="margin-top:10px">Standard Room - Floor 2</h3><p style="font-size:12px;color:#6b7280">Kumasi, Ghana 📍</p><div class="stayGrid"><div class="stayItem"><small>Check-In</small><b>Nov 5</b></div><div class="stayItem"><small>Check-Out</small><b>Nov 8</b></div><div class="stayItem"><small>Guests</small><b>2 Guests</b></div><div class="stayItem"><small>Total</small><b id="roomPrice">GHS 540</b></div></div><button class="btn primary" onclick="openContact()">📞 Contact Front Desk</button><button class="btn secondary" onclick="openService()">🧹 Request Room Service</button></div>
 
-<div class="nav"><a href="index.html"><div>🏠</div>Home</a><a class="active"><div>👤</div>Guest</a><a href="#" onclick="openContact()"><div>💬</div>Support</a></div>
+<div class="nav"><a href="index.html" style="text-decoration:none;color:#6b7280;font-size:11px;text-align:center">🏠<br>Home</a><a style="color:#2563eb;font-weight:700;font-size:11px;text-align:center">👤<br>Guest</a><a onclick="openContact()" style="text-decoration:none;color:#6b7280;font-size:11px;text-align:center">💬<br>Support</a></div>
 
-<!-- CONTACT MODAL WITH MESSAGE TO ADMIN -->
-<div id="contactModal" class="modal" onclick="if(event.target==this)closeContact()"><div class="sheet"><h3>📞 Contact Front Desk</h3><p style="font-size:12px;color:#6b7280">Message will be sent to admin + sound alert</p><div style="background:#f9fafb;padding:10px;border-radius:10px;margin:10px 0;font-size:13px"><b>To:</b> Admin (Front Desk)<br><b>From:</b> <span id="fromName">Yaw - Standard Room</span><br><b>Phone:</b> <span id="fromPhone">+233...</span></div><textarea id="adminMsg" placeholder="Type your message to admin... Eg: I need extra towel, AC not working, please clean room..."></textarea><button class="btn primary" onclick="sendToAdmin()">📤 Send Message to Admin + 🔊 Sound</button><button class="btn secondary" onclick="closeContact()">Cancel</button><p id="sentStatus" style="display:none;text-align:center;color:#16a34a;font-weight:700;margin-top:10px">✅ Message sent to admin!</p></div></div>
+<div id="contactModal" class="modal" onclick="if(event.target==this)closeContact()"><div class="sheet"><h3>📞 Message Admin</h3><p style="font-size:12px;color:#6b7280">Sends to admin + plays sound 🔊</p><div style="background:#f3f4f6;padding:10px;border-radius:10px;margin:10px 0;font-size:13px">From: <b id="fromName">Yaw</b> - <span id="fromRoom">Standard</span><br>Phone: <span id="fromPhone">+233...</span></div><textarea id="adminMsg" placeholder="Type message... eg: AC not working, need towel"></textarea><button class="btn primary" onclick="sendToAdmin()">📤 Send to Admin + Sound</button><button class="btn secondary" onclick="closeContact()">Cancel</button></div></div>
 
-<!-- SERVICE MODAL -->
-<div id="serviceModal" class="modal" onclick="if(event.target==this)closeService()"><div class="sheet"><h3>🧹 Room Service</h3><div style="display:grid;gap:8px;margin-top:10px"><button class="btn secondary" onclick="orderService('Room Cleaning')">🧹 Room Cleaning</button><button class="btn secondary" onclick="orderService('Fresh Towels')">🛁 Fresh Towels</button><button class="btn secondary" onclick="orderService('Breakfast GHS 30')">🍳 Breakfast (GHS 30)</button></div><button class="btn secondary" onclick="closeService()" style="margin-top:12px">Close</button></div></div>
+<div id="serviceModal" class="modal" onclick="if(event.target==this)closeService()"><div class="sheet"><h3>Room Service</h3><button class="btn secondary" onclick="orderService('Cleaning')">🧹 Cleaning</button><button class="btn secondary" onclick="orderService('Towels')">🛁 Towels</button><button class="btn secondary" onclick="orderService('Breakfast GHS 30')">🍳 Breakfast GHS 30</button><button class="btn secondary" onclick="closeService()">Close</button></div></div>
 
-<!-- SOUND -->
-<audio id="ding" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=notification-sound-7062.mp3" type="audio/mpeg"></audio>
+<audio id="ding" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=notification-sound-7062.mp3"></audio>
 
 <script>
-const imgs={Standard:"https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600",Deluxe:"https://images.unsplash.com/photo-1566669437687-704479b23c06?w=600",Executive:"https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600",Suite:"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600"};
-const name=localStorage.getItem('guestName')||'Yaw';const full=localStorage.getItem('guestFull')||'Yaw mickel';const phone=localStorage.getItem('guestPhone')||'+233 24 123 4567';const room=localStorage.getItem('lastRoom')||'Standard';const price=localStorage.getItem('lastPrice')||'180';
-document.getElementById('gName').innerText='Hi, '+name+' 👋';document.getElementById('gFull').innerText=full;document.getElementById('gAvatar').innerText=name[0].toUpperCase();document.getElementById('fromName').innerText=full+' - '+room+' Room';document.getElementById('fromPhone').innerText=phone;document.getElementById('roomName').innerText=room+' Room - Floor 2';document.getElementById('roomImg').src=imgs[room]||imgs.Standard;document.getElementById('roomPrice').innerText='GHS '+(parseInt(price)*3);
-
-function copyWifi(){const p=document.getElementById('wifiPass').innerText;navigator.clipboard.writeText(p);alert('✅ WiFi Password Copied: '+p)}
+const name=localStorage.getItem('guestName')||'Yaw';const full=localStorage.getItem('guestFull')||'Yaw mickel';const phone=localStorage.getItem('guestPhone')||'+233 24 123 4567';const room=localStorage.getItem('lastRoom')||'Standard';document.getElementById('gName').innerText='Hi, '+name+' 👋';document.getElementById('gFull').innerText=full;document.getElementById('gAvatar').innerText=name[0].toUpperCase();document.getElementById('fromName').innerText=full;document.getElementById('fromRoom').innerText=room;document.getElementById('fromPhone').innerText=phone;document.getElementById('roomName').innerText=room+' Room - Floor 2';
+function copyWifi(){navigator.clipboard.writeText(document.getElementById('wifiPass').innerText);alert('✅ WiFi Password Copied: Kumasi@2026')}
 function openContact(){document.getElementById('contactModal').classList.add('show')}function closeContact(){document.getElementById('contactModal').classList.remove('show')}
 function openService(){document.getElementById('serviceModal').classList.add('show')}function closeService(){document.getElementById('serviceModal').classList.remove('show')}
-
-// SOUND + SEND TO ADMIN
-function playSound(){
-  try{
-    const audio=document.getElementById('ding');audio.currentTime=0;audio.play();
-    // fallback beep if audio blocked
-    const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=880;g.gain.value=0.3;o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>{o.stop();ctx.close()},600);
-    // vibration
-    if(navigator.vibrate) navigator.vibrate([200,100,200]);
-  }catch(e){}
-}
-
-function sendToAdmin(){
-  const msg=document.getElementById('adminMsg').value.trim();
-  if(!msg){alert('Type a message first');return}
-  
-  // 1. Play sound
-  playSound();
-  
-  // 2. Save to admin inbox (localStorage for demo - in real app goes to server)
-  const inbox=JSON.parse(localStorage.getItem('adminInbox')||'[]');
-  inbox.push({id:Date.now(),guest:full,room:room,phone:phone,message:msg,time:new Date().toLocaleString()});
-  localStorage.setItem('adminInbox',JSON.stringify(inbox));
-  
-  // 3. Show sent status
-  document.getElementById('sentStatus').style.display='block';
-  document.getElementById('sentStatus').innerText='✅ Message sent to admin! 🔊 Sound played';
-  
-  // 4. Also send to WhatsApp admin (real admin gets it)
-  setTimeout(()=>{
-    const waMsg=`NEW GUEST MESSAGE%0A%0AFrom: ${full}%0ARoom: ${room} - Floor 2%0APhone: ${phone}%0A%0AMessage: ${msg}%0A%0ATime: ${new Date().toLocaleString()}`;
-    window.open(`https://wa.me/233241234567?text=${waMsg}`,'_blank');
-    closeContact();
-    document.getElementById('adminMsg').value='';
-    document.getElementById('sentStatus').style.display='none';
-  },1200);
-}
-
-function orderService(s){playSound();alert('✅ '+s+' requested! Staff coming in 10 mins 🔊');closeService()}
-function checkout(){if(confirm('Check out?')){localStorage.clear();location.href='index.html'}}
+function playSound(){try{const a=document.getElementById('ding');a.currentTime=0;a.play();if(navigator.vibrate)navigator.vibrate([300,100,300]);const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();o.frequency.value=880;o.connect(ctx.destination);o.start();setTimeout(()=>o.stop(),400)}catch(e){}}
+function sendToAdmin(){const m=document.getElementById('adminMsg').value.trim();if(!m){alert('Type message');return}playSound();const inbox=JSON.parse(localStorage.getItem('adminInbox')||'[]');inbox.push({guest:full,room:room,phone:phone,msg:m,time:new Date().toLocaleString()});localStorage.setItem('adminInbox',JSON.stringify(inbox));alert('✅ Message sent to admin! 🔊 Sound played\n\nTo: Admin\nMessage: '+m);const wa=`NEW GUEST MSG%0AFrom: ${full}%0ARoom: ${room}%0AMsg: ${m}`;window.open('https://wa.me/233241234567?text='+wa,'_blank');closeContact();document.getElementById('adminMsg').value=''}
+function orderService(s){playSound();alert('✅ '+s+' requested for '+full+'! Staff coming 🔊');closeService()}
 </script></body></html>
