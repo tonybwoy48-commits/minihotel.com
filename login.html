@@ -1,59 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login - MiniHotel</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f1f5f9;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}.card{background:#fff;width:100%;max-width:380px;border-radius:24px;padding:26px;box-shadow:0 10px 30px rgba(0,0,0,.06);border:1px solid #eef2f7}.logoRow{display:flex;align-items:center;gap:12px;margin-bottom:18px}.logoBox{width:44px;height:44px;background:#0f172a;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:18px}.brand b{font-size:15px;display:block;line-height:1.2}.brand small{color:#64748b;font-size:11px}h2{font-size:22px;font-weight:800}h2+small{color:#64748b;font-size:12.5px;display:block;margin:4px 0 18px}.input{width:100%;padding:14px;border-radius:12px;border:1.5px solid #e2e8f0;background:#fff;font-size:14px;margin:7px 0}.input:focus{border-color:#2563eb;outline:none}.btn{width:100%;padding:14px;border-radius:12px;border:none;font-weight:800;font-size:14px;margin-top:12px;background:#2563eb;color:#fff;cursor:pointer}.btn:active{transform:scale(.98)}.foot{text-align:center;margin-top:16px;font-size:12px;color:#64748b}.foot a{color:#2563eb;text-decoration:none;font-weight:700}.err{display:none;background:#fef2f2;color:#dc2626;padding:10px;border-radius:10px;font-size:12px;text-align:center;margin-bottom:10px}</style></head><body>
-<div class="card">
-<div class="logoRow"><div class="logoBox">M</div><div class="brand"><b>MiniHotel Kumasi</b><small>Kumasi • Ghana</small></div><div style="margin-left:auto;font-size:20px">👋</div></div>
-<h2>Welcome Back 👋</h2><small>Kumasi MiniHotel • Ghana</small>
-<div id="err" class="err">❌ Wrong email or password</div>
-<input id="email" class="input" placeholder="Email">
-<input id="pass" class="input" type="password" placeholder="Password">
-<button class="btn" onclick="smartLogin()">Login → Continue</button>
-<div class="foot">No account? <a href="register.html">Create account</a><br><br>Admin: admin / MiniHotel2026<br>Guest: any account you create</div>
-</div>
-
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif}body{background:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}.card{background:#fff;width:100%;max-width:380px;border-radius:20px;padding:20px;border:1px solid #e2e8f0}.inp{width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:10px;margin:8px 0}.btn{width:100%;padding:13px;background:#0f172a;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer;margin-top:8px}</style></head><body>
+<div class="card"><h2 style="text-align:center">MiniHotel Login</h2><p style="text-align:center;color:#64748b;font-size:12px;margin:6px 0 14px">Admin & Guests use same login</p><input id="email" class="inp" placeholder="Email or admin"><input id="pass" class="inp" type="password" placeholder="Password"><button class="btn" onclick="login()">Login</button><p style="text-align:center;font-size:12px;margin-top:12px">No account? <a href="register.html">Create Account</a></p><div style="background:#f8fafc;padding:10px;border-radius:10px;margin-top:12px;font-size:11px"><b>Admin:</b> admin / MiniHotel2026<br><b>Guest:</b> Create account then login</div></div>
 <script>
-// SEED ADMIN ACCOUNT
-let users = JSON.parse(localStorage.getItem('allUsers')||'[]');
-if(!users.find(u=>u.email==='admin')){
-  users.push({name:'Admin User',email:'admin',password:'MiniHotel2026',role:'admin'});
-  users.push({name:'Admin User',email:'admin@minihotel.com',password:'MiniHotel2026',role:'admin'});
-  localStorage.setItem('allUsers',JSON.stringify(users));
-}
-
-function smartLogin(){
-  const e = document.getElementById('email').value.trim().toLowerCase();
-  const p = document.getElementById('pass').value.trim();
-  const savedPass = localStorage.getItem('adminPass')||'MiniHotel2026';
-  const savedUser = (localStorage.getItem('adminUser')||'admin').toLowerCase();
-  users = JSON.parse(localStorage.getItem('allUsers')||'[]');
-  
-  // 1. ADMIN CHECK - If credentials match admin, go to ADMIN
-  if((e===savedUser || e==='admin' || e==='admin@minihotel.com') && p===savedPass){
-    localStorage.setItem('adminLoggedIn','true');
-    localStorage.setItem('currentUser',JSON.stringify({email:e,role:'admin',name:'Admin'}));
-    location.href='admin.html?v=onelgin';
-    return;
-  }
-  
-  // 2. GUEST CHECK - Find in created accounts
-  const found = users.find(u=>u.email.toLowerCase()===e && u.password===p);
-  if(found){
-    if(found.role==='admin'){
-      localStorage.setItem('adminLoggedIn','true');
-      location.href='admin.html';
-    }else{
-      localStorage.setItem('guestLoggedIn','true');
-      localStorage.setItem('currentUser',JSON.stringify(found));
-      localStorage.setItem('guestFull',found.name);
-      localStorage.setItem('guestEmail',found.email);
-      location.href='guest.html';
-    }
-    return;
-  }
-  
-  // 3. FAIL
-  document.getElementById('err').style.display='block';
-  if(navigator.vibrate) navigator.vibrate([100,50,100]);
-}
-if(localStorage.getItem('adminLoggedIn')==='true'){
- // optional auto redirect - comment out if you want
+(function(){let users=JSON.parse(localStorage.getItem('allUsers')||'[]');if(!users.find(u=>u.role==='admin')){users.push({name:'Admin',email:'admin',password:'MiniHotel2026',role:'admin',status:'approved'});localStorage.setItem('allUsers',JSON.stringify(users));}})();
+function login(){
+ let e=document.getElementById('email').value.trim();let p=document.getElementById('pass').value.trim();
+ let adminU=localStorage.getItem('adminUser')||'admin';let adminP=localStorage.getItem('adminPass')||'MiniHotel2026';
+ if((e===adminU&&p===adminP)||(e==='admin'&&p==='MiniHotel2026')){localStorage.setItem('adminLoggedIn','true');localStorage.setItem('currentUser',JSON.stringify({name:'Admin',email:'admin',role:'admin',status:'approved'}));location.href='admin.html?v=final';return;}
+ let users=JSON.parse(localStorage.getItem('allUsers')||'[]');let u=users.find(x=>(x.email===e||x.name===e)&&x.password===p);
+ if(u){localStorage.setItem('currentUser',JSON.stringify(u));if(u.role==='admin'){localStorage.setItem('adminLoggedIn','true');location.href='admin.html?v=final';}else{if(u.status==='pending_payment')location.href='payment.html';else location.href='guest.html?v=final';}}else alert('Wrong email or password');
 }
 </script></body></html>
